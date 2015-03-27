@@ -1,6 +1,6 @@
 var ready=function(b){if(!ready.r){ready.r=[]}if(!ready.t){ready.t=null}ready.r.push(b);var c=function(){clearTimeout(ready.t);while(ready.r.length){ready.r.splice(0,1)[0]()}};var a=function(){if(document&&document.getElementsByTagName&&document.getElementById&&document.body){c()}else{ready.t=setTimeout(a,13)}};if(ready.t==null){a()}return ready};
 
-CanvasRenderingContext2D.prototype.clear = 
+CanvasRenderingContext2D.prototype.clear =
   CanvasRenderingContext2D.prototype.clear || function (preserveTransform) {
     if (preserveTransform) {
       this.save();
@@ -11,7 +11,7 @@ CanvasRenderingContext2D.prototype.clear =
 
     if (preserveTransform) {
       this.restore();
-    }           
+    }
 };
 
 ready(function() {
@@ -39,7 +39,7 @@ ready(function() {
 
 		return bool;
 	})();
-	
+
 	var removeClass = function(el, cl) {
 		var cl_now = el.getAttribute('class');
 		if (cl_now === null)
@@ -83,7 +83,7 @@ ready(function() {
 			}
 		}
 	};
-	
+
 	var createLayer = function(layer_name) {
 		var c = createElement('canvas');
 		c.width = documents[documentId].width;
@@ -136,7 +136,7 @@ ready(function() {
 		pixels.data[offset+3] = Math.max(pixels.data[offset+3] - subtract, 0);
 		context.putImageData(pixels, 0, 0, x, y, 1, 1);
 	};
-	
+
 	var copyPixels = function(layer, x1, y1, x2, y2) {
 		return layer.context.getImageData(x1, y1, x2-x1, y2-y1);
 	};
@@ -180,7 +180,7 @@ ready(function() {
 		while(sceneCont.hasChildNodes()) {
 			sceneCont.removeChild(sceneCont.childNodes[0]);
 		}
-		
+
 		for (var a = 0; a < documents[documentId].layers.length; a++) {
 			if (!documents[documentId].layers[a].layer) {
 				var c = createElement('canvas');
@@ -220,7 +220,7 @@ ready(function() {
 				layers.push(documents[i].layers[a].layer);
 			}
 		}
-		
+
 		var canvas = document.createElement('canvas'),
 		    context,
 		    images = layers.map(function(canvas) {
@@ -251,7 +251,7 @@ ready(function() {
 			});
 
 			callback(canvas);
-			
+
 			delete context;
 		};
 	};
@@ -265,7 +265,7 @@ ready(function() {
 			delete canvas;
 		});
 	};
-	
+
 	var previewInBackground = function(i) {
 		exportToCanvas(i, function(canvas) {
 			var w = window.screen.availWidth - 20;
@@ -291,7 +291,7 @@ ready(function() {
 			html += '<input type="button" value="auto" onclick="document.body.style.mozBackgroundSize=\'auto\';document.body.style.webkitBackgroundSize=\'auto\';document.body.style.backgroundSize=\'auto auto\'" />';
 			html += '</div>';
 			html += '</body></html>';
-			 
+
 			ref.document.write(html);
 			ref.focus();
 			delete canvas;
@@ -316,7 +316,7 @@ ready(function() {
 			offsetLeft = width - documents[i].width;
 			offsetTop = height - documents[i].height;
 		}
-		
+
 		// set container sizes
 		documents[i].width = sceneWidth = width;
 		documents[i].height = sceneHeight = height;
@@ -328,17 +328,17 @@ ready(function() {
 			documents[i].layers[a].layer.width = documents[i].width;
 			documents[i].layers[a].layer.height = documents[i].height;
 			documents[i].layers[a].context.putImageData(pixels, offsetLeft, offsetTop);
-			
+
 			documents[i].layers[a].pixels = documents[i].layers[a].context.getImageData(0, 0, documents[i].width, documents[i].height);
 
 		}
-		
-		
+
+
 		fitSceneToWindow();
 		renderDocumentLayers();
 		console.log(documents[i]);
 	};
-	
+
 	var collectDialogData = function(form) {
 		var i, j, q = {};
 		var elements = getElements('input,button,select,textarea', form);
@@ -362,12 +362,12 @@ ready(function() {
 				case 'radio':
 					if (elements[i].checked) {
 						q[elements[i].name] = elements[i].value;
-					}						
+					}
 					break;
 				case 'file':
 					break;
 				}
-				break;			 
+				break;
 			case 'TEXTAREA':
 				q[elements[i].name] = elements[i].value;
 				break;
@@ -425,7 +425,7 @@ ready(function() {
 	menu2.setAttribute('class', 'level1');
 	menu2.innerHTML = '<a>Image</a><ul><li><a id="menu_image_canvas_size">Canvas Size</a></li></ul>';
 	menuul.appendChild(menu2);
-	
+
 	// menu 3
 	var menu3 = createElement('li');
 	menu3.setAttribute('class', 'level1');
@@ -437,13 +437,13 @@ ready(function() {
 	menu5.setAttribute('class', 'level1');
 	menu5.innerHTML = '<a>Web</a><ul><li><a id="menu_preview_in_background">Preview in background..</a></li></ul>';
 	menuul.appendChild(menu5);
-	
+
 	// menu 4
 	var menu4 = createElement('li');
 	menu4.setAttribute('class', 'level1');
 	menu4.innerHTML = '<a>Window</a><ul><li><ul id="menu_windows"></ul></li><li class="menu_delim"></li><li><a>Close All</a></li></ul>';
 	menuul.appendChild(menu4);
-	
+
 	var menuIsActive = false;
 	// set menu events
 	for (var a = 0, menulevels = getElements('#menu .level1 > a'); a < menulevels.length; a++) {
@@ -468,7 +468,7 @@ ready(function() {
 	var menu_preview_in_background = getElement('#menu_preview_in_background');
 	var menu_image_canvas_size = getElement('#menu_image_canvas_size');
 	var menu_filter_grayscale = getElement('#menu_filter_grayscale');
-	
+
 	menu_new_image.addEventListener('click', function() {
 		createDocument('New '+(documents.length+1), 100, 100);
 		changeDocument(documents.length-1);
@@ -480,12 +480,12 @@ ready(function() {
 		previewInBackground(documentId);
 	}, false);
 	menu_image_canvas_size.addEventListener('click', function() {
-		showDialog('canvas_size', { 
+		showDialog('canvas_size', {
 			'content': 'Canvas Size: <input type="text" size="4" name="canvas_width" value="'+documents[documentId].width+'" /> x <input type="text" size="4" name="canvas_height" value="'+documents[documentId].height+'" /><br />Expand from:<br /><div style="width: 60px; height: 60px"><input type="radio" name="direction" value="lefttop" checked="checked" /><input type="radio" name="direction" value="righttop" /><br /><input type="radio" name="direction" value="leftbottom" /><input type="radio" name="direction" value="rightbottom" /></div>',
-			'button_ok': function(r) { resizeDocumentCanvas(documentId, r.canvas_width, r.canvas_height, r.direction); }, 
+			'button_ok': function(r) { resizeDocumentCanvas(documentId, r.canvas_width, r.canvas_height, r.direction); },
 			'button_cancel': 1 });
 	}, false);
-	
+
 	menu_filter_grayscale.addEventListener('click', function() {
 		var layer = documents[documentId].layers[activeLayer];
 		var pixels = layer.pixels;
@@ -507,7 +507,7 @@ ready(function() {
 		layer.pixels = layer.context.getImageData(0, 0, pixels.width, pixels.height);
 		documents[documentId].layers[activeLayer] = layer;
 	}, false);
-	
+
 	// set other events
 	var body = getElement('body');
 	body.addEventListener('click', function() {
@@ -517,7 +517,7 @@ ready(function() {
 			}
 		}
 	}, false);
-	
+
 	// left panel
 	var panel_left = createElement('div');
 	panel_left.setAttribute('id', 'panel_left');
@@ -545,12 +545,12 @@ ready(function() {
 		e = e || window.event;
 
 		if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
-		    isRightMB = e.which == 3; 
-		else if ("button" in e)  // IE, Opera 
-		    isRightMB = e.button == 2; 
+		    isRightMB = e.which == 3;
+		else if ("button" in e)  // IE, Opera
+		    isRightMB = e.button == 2;
 		return isRightMB;
 	};
-	
+
 	var ctrlDown = false;
   var shiftDown = false;
   var shiftKey = 16, ctrlKey = 17, vKey = 86, cKey = 67, nKey = 78;
@@ -571,7 +571,7 @@ ready(function() {
 			this.setAttribute('class', this.getAttribute('class') + ' active');
 			activeTool = this.getAttribute('id');
 			tool_options.setAttribute('class', activeTool);
-			
+
 			toolLayer.removeEventListener('mousedown', mouseDown);
 			toolLayer.removeEventListener('mouseup', mouseUp);
 			toolLayer.removeEventListener('mousemove', mouseMove);
@@ -582,52 +582,52 @@ ready(function() {
 			switch(activeTool) {
 				case 'tool_select':
 					//toolLayerContext.clear();
-					
+
 					var tx, ty, bx, by;
 					var drawRect = function(x1, y1, x2, y2) {
 						tx = Math.min(x1,x2);
 						ty = Math.min(y1,y2);
 						bx = Math.max(x1,x2);
 						by = Math.max(y1,y2);
-						
+
 						toolLayerContext.setLineDash([0,0]);
 						toolLayerContext.strokeStyle = '#BBBBBB';
 						toolLayerContext.strokeRect(tx-0.5, ty-0.5, bx-tx, by-ty);
 						toolLayerContext.setLineDash([4,3]);
 						toolLayerContext.strokeStyle = 'black';
 						toolLayerContext.strokeRect(tx-0.5, ty-0.5, bx-tx, by-ty);
-						
+
 					};
-					
+
 					var x1, x2, y1, y2;
-					
+
 					mouseDown = function(e) {
 						if (isRMB(e))
 							return;
 						x2 = x1 = e.offsetX;
 						y2 = y1 = e.offsetY;
-						
+
 						toolLayerContext.clear();
-						
-						drawRect(x1, y1, x2, y2);	
+
+						drawRect(x1, y1, x2, y2);
 						toolLayer.removeEventListener('mousemove', mouseMove);
 						toolLayer.addEventListener('mousemove', mouseMove);
 					};
 					mouseMove = function(e) {
 						x2 = e.offsetX;
 						y2 = e.offsetY;
-						
+
 						toolLayerContext.clear();
-						
-						drawRect(x1, y1, x2, y2);	
+
+						drawRect(x1, y1, x2, y2);
 					};
 
 					mouseUp = function(e) {
 						toolLayer.removeEventListener('mousemove', mouseMove);
 					};
-					
+
 					keyDown = function(e) {
-						if (ctrlDown) { 
+						if (ctrlDown) {
 							if (e.keyCode == nKey) {
 								// new document
 								createDocument('New '+documents.length, 400, 300);
@@ -657,32 +657,28 @@ ready(function() {
 							}
 						}
 					};
-					
+
 					toolLayer.addEventListener('mousedown', mouseDown);
 					toolLayer.addEventListener('mouseup', mouseUp);
 					document.addEventListener('keydown', keyDown);
-					
+
 					break;
-					
+
 				case 'tool_pencil':
-					
+
 					var prevx = null, prevy = null;
 					var drawPixel = function(x, y) {
 						// for smooth drawing
-						if (prevx != null) {
+            if (prevx != null) {
 							var steps = Math.max( Math.abs(x - prevx), Math.abs(y - prevy) );
 							var stepx = x - prevx;
 							var stepy = y - prevy;
-							
-							var astart = tempx-tool_pencil_width/2;
-							var bstart = tempy-tool_pencil_width/2;
-							var aend = tempx+tool_pencil_width/2;
-							var bend = tempy+tool_pencil_width/2;
+              var a, b, s, tempx, tempy;
 							for (var s = 0; s < steps; s++) {
-								var tempx = Math.floor(prevx + stepx*s/steps);
-								var tempy = Math.floor(prevy + stepy*s/steps);
-								for (var a = astart; a < aend; a++) {
-									for (var b = bstart; b < bend; b++) {
+								tempx = Math.floor(prevx + stepx*s/steps);
+								tempy = Math.floor(prevy + stepy*s/steps);
+								for (a = tempx-tool_pencil_width/2; a < tempx+tool_pencil_width/2; a++) {
+									for (b = tempy-tool_pencil_width/2; b < tempy+tool_pencil_width/2; b++) {
 										if (b > 0 && a > 0 && a < documents[documentId].width && b < documents[documentId].height) {
 											setPixelData(documents[documentId].layers[activeLayer].context, documents[documentId].layers[activeLayer].pixels, Math.floor(a), Math.floor(b), tool_pencil_color);
 										}
@@ -700,13 +696,13 @@ ready(function() {
 						}
 						prevx = x;
 						prevy = y;
-						
+
 					};
 
 					mouseDown = function(e) {
 						if (isRMB(e))
 							return;
-						
+
 						var target  = e.target || e.srcElement,
               rect    = target.getBoundingClientRect(),
               offsetX = e.clientX - rect.left,
@@ -717,11 +713,11 @@ ready(function() {
 						var x = e.offsetX - sceneOffsetLeft;
 						var y = e.offsetY - sceneOffsetTop;
 						//console.log(x,y);
-						drawPixel(x, y);	
+						drawPixel(x, y);
 						toolLayer.removeEventListener('mousemove', mouseMove);
 						toolLayer.addEventListener('mousemove', mouseMove);
 					};
-				
+
 					mouseMove = function(e) {
 						var target  = e.target || e.srcElement,
               rect    = target.getBoundingClientRect(),
@@ -732,19 +728,19 @@ ready(function() {
 						e.offsetY = offsetY;
 						var x = e.offsetX-sceneOffsetLeft;
 						var y = e.offsetY-sceneOffsetTop;
-						drawPixel(x, y);	
+            drawPixel(x, y);
 					};
 
 					mouseUp = function(e) {
-						prevx = prevy = null;						
+						prevx = prevy = null;
 						toolLayer.removeEventListener('mousemove', mouseMove);
 					};
 
 					toolLayer.addEventListener('mousedown', mouseDown);
 					toolLayer.addEventListener('mouseup', mouseUp);
-					
+
 					break;
-					
+
 				case 'tool_erase':
 					var erasePixel = function(x, y) {
 						for (var a = x-tool_erase_width/2; a < x+tool_erase_width/2; a++) {
@@ -753,21 +749,21 @@ ready(function() {
 							}
 						}
 					};
-					
+
 					mouseDown = function(e) {
 						if (isRMB(e))
 							return;
 						var x = e.offsetX-sceneOffsetLeft;
 						var y = e.offsetY-sceneOffsetTop;
-						erasePixel(x, y);	
+						erasePixel(x, y);
 						toolLayer.removeEventListener('mousemove', mouseMove);
 						toolLayer.addEventListener('mousemove', mouseMove);
 					};
-				
+
 					mouseMove = function(e) {
 						var x = e.offsetX-sceneOffsetLeft;
 						var y = e.offsetY-sceneOffsetTop;
-						erasePixel(x, y);	
+						erasePixel(x, y);
 					};
 
 					mouseUp = function(e) {
@@ -778,10 +774,10 @@ ready(function() {
 					toolLayer.addEventListener('mouseup', mouseUp);
 					break;
 				case 'tool_move':
-					
+
 					break;
 			}
-			
+
 		});
 	}
 
@@ -789,7 +785,7 @@ ready(function() {
 	var tool_pencil_color = [0, 0, 0, 255];
 	var tool_pencil_width = 5;
 	var tool_erase_width = 5;
-	
+
 	var tool_options = createElement('div');
 	tool_options.setAttribute('id', 'tool_options');
 	tool_options.innerHTML = '<ul class="tool_options tool_pencil_options">\
@@ -832,7 +828,7 @@ ready(function() {
 			html += '<input type="button" class="button_ok" value="OK" />';
 		}
 		html += '</div>';
-		
+
 		html += '</div>';
 		div.innerHTML = html;
 		impressorElem.appendChild(div);
@@ -858,8 +854,8 @@ ready(function() {
 	var hideDialog = function(id) {
 		impressorElem.removeChild(getElement('#'+id));
 	};
-	
-	
+
+
 	// layers
 	var activeLayer = 0;
 	var layers_elem = createElement('div');
@@ -876,7 +872,7 @@ ready(function() {
 	}, false);
 	layers_elem.appendChild(button_add_new_layer);
 	panel_left.appendChild(layers_elem);
-	
+
 	// drag & drop stuff
 	var dragTimeout = null;
 	var onDragFileEnter = function(e) {
@@ -912,7 +908,7 @@ ready(function() {
 				return function(e) {
 					createDocument(theFile.name, 1, 1); // just 1x1 pixels for now
 					changeDocument(documents.length-1);
-					
+
 					var image = new Image();
 					image.onload = function() {
 						resizeDocumentCanvas(documentId, image.width, image.height); // resize document to image size
@@ -952,17 +948,17 @@ ready(function() {
 	impressorElem.appendChild(sceneCont);
 	var sceneOffsetLeft = 0;
 	var sceneOffsetTop = 0;
-	
+
 	// tool layer
 	var toolLayer = createElement('canvas');
 	toolLayer.setAttribute('id', 'toollayer');
 	toolLayer.width = backgroundWidth;
 	toolLayer.height = backgroundHeight;
 	var toolLayerContext = toolLayer.getContext('2d');
-	
+
 	// scene
 	impressorElem.appendChild(toolLayer);
-	
+
 	var fitSceneToWindow = function(e) {
 		var w = sceneWidth;
 		var h = sceneHeight;
@@ -990,13 +986,13 @@ ready(function() {
 
 	// default documents
 	var documentId = null;
-	
+
 	var documents = [];
 
 	createDocument('New', 400, 300);
 	changeDocument(0);
 	selectTool('pencil');
-	
+
 
 	// draw loop
 });
