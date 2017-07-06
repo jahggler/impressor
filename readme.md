@@ -2,4 +2,4 @@
 
 It is a proof-of-concept that JavaScript can be used to perform complex graphic editing tasks
 
-Demo: [http://jahggler.github.io/impressor/](http://jahggler.github.io/impressor/)
+Demo: [http://javascriptlove.github.io/impressor/](http://javascriptlove.github.io/impressor/)
